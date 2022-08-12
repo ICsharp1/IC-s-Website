@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<nav class="MainNav">
+    <h1 id="title">
+        Projects:
+    </h1>
+    <ul class="list">
+        {% for p in ps %}
+            <li><a href="{{ p.Projectlink }}" class="MainLink">{{ p.title }}</a></li>
+        {% endfor %}
+        </ul>
+</nav>
+
+<div class="content">
+    <p>Hi! i am israel cohen and wellcome to my website</p>
+    <button class="glow-on-hover" id="hire">Hire</button>
+</div>
+{% endblock %}

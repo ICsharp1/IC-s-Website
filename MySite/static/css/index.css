@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: rgb(255, 255, 255);
+    background-color: rgb(3, 11, 37);
+
+}
+
+::selection {
+    color: #828ed5;
+}
+
+#hero {
+    margin: 0;
+    padding: 0;
+    /*background-image: url('../TemplateAttempt/images/Background.jpg');*/
+    height: 100vh;
+    background-size: cover;
+    font-size: 2em;
+    font-family: 'Lucida sans';
+}
+
+#hero h1 {
+    margin: 0;
+}
+
+.MainNav {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.MainNav ul {
+    display: flex;
+    list-style-type: none;
+}
+
+.MainNav ul li {
+    margin: .5em;
+    font-weight: 500;
+}
+
+.content {
+    text-align: center;
+    font-size: 3.5rem;
+    margin-top: 250;
+    font-weight: 550;
+}
+
+/* .content button {
+    font-size: 3rem;
+    font-weight: 550;
+    background-color: rgb(32, 105, 232);
+    color: white;
+    border: none;
+    padding: .5rem 1.3rem;
+    cursor: pointer;
+    transition: all .3s ease;
+    border-radius: 10%;
+}
+
+.content button:hover {
+    background-color: rgb(22, 67, 144);
+} */
