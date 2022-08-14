@@ -11,9 +11,33 @@ def index(response):
     return render(response, 'base.html', {})
 
 
+def bs(response):
+    ps = Project.objects.all()
+    return render(response, 'main/bs.html', {"ps": ps})
+
+
+def split_list(arr, size):
+    arrs = []
+    while len(arr) > size:
+        pice = arr[:size]
+        arrs.append(pice)
+        arr = arr[size:]
+    arrs.append(arr)
+    return arrs
+
+
 def home(response):
     ps = Project.objects.all()
+    number_of_cards = 4
+    ps = split_list(ps, number_of_cards)
     return render(response, 'main/home.html', {"ps": ps})
+
+
+def projects(response):
+    ps = Project.objects.all()
+    number_of_cards = 4
+    ps = split_list(ps, number_of_cards)
+    return render(response, 'main/projects.html', {"ps": ps})
 
 
 def addproject(response):

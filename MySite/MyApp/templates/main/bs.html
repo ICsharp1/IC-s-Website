@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+  <div class="container mt-1">
+    <h1 style="padding: 20px;">My projects:</h1>
+  </div>
+  {% comment %}there will be 2 for loops looping through ps and dosplaying each projects as a card with image, title, and description, on hover there will be a shadow effect the first loop will be for pl in ps and the second will be for p in pl{% endcomment %}
+  <div class="container">
+    <div class="row">
+      {% for p in ps %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm" style="background-color: rgb(29, 41, 53)">
+            <img src="{{ p.image }}" alt="{{ p.title }}" class="bd-placeholder-img card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title">{{ p.title }}</h5>
+              <hr style="background: red;" />
+              <p class="card-text">{{ p.description }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  {% if p.ProjectPageExists %}
+                    <a href="{{ p.url }}" class="btn btn-link">Go to page</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

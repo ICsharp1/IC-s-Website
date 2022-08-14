@@ -27,7 +27,7 @@ class log_in_form(forms.Form):
 class adding_project_form(forms.Form):
     title = forms.CharField(max_length=200, label='Title')
     description = forms.CharField(label='Description', widget=forms.Textarea)
-    imageLink = forms.URLField(label='Image Link')
+    image = forms.URLField(label='Image Link')
     Projectlink = forms.URLField(label='Project Link')
     ProjectPageExists = forms.BooleanField(
         label='Project Page Exists', required=False)
