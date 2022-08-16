@@ -1,7 +1,11 @@
 {% load static %}
 <html lang="en">
   <head>
-    <title>IC time</title>
+    <title>
+      {% block title %}
+
+      {% endblock %}
+    </title>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
@@ -24,7 +28,7 @@
 
   <body>
     <div class="container">
-      <nav class="navbar navbar-expand-sm navbar-dark">
+      <nav class="navbar navbar-expand-sm" style="color: #36d223">
         <a class="navbar-brand" href="#">
           <img src="https://i.postimg.cc/XNcGzd2s/logo.png" alt="Bootstrap" width="30" height="24" class="d-inline-block align-top" />
           <span class="hidden">Bootstrap</span>
@@ -33,16 +37,22 @@
         <div class="collapse navbar-collapse" id="toggleMobileMenu">
           <ul class="navbar-nav ms-auto text-center">
             <li>
-              <a class="nav-link" href="http://127.0.0.1:8000/">home</a>
+              <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
             </li>
             <li>
-              <a class="nav-link" href="#">Sign in</a>
+              <a class="nav-link" href="http://127.0.0.1:8000/login">Sign in</a>
             </li>
             <li>
               <a class="nav-link" href="http://127.0.0.1:8000/bs">Browse projects</a>
             </li>
             <li>
-              <a class="nav-link" href="#">Sign up</a>
+              <a class="nav-link" href="http://127.0.0.1:8000/register/">Register</a>
+            </li>
+            <li>
+              <a class="nav-link" href="http://127.0.0.1:8000/addproject/">Add project</a>
+            </li>
+            <li>
+              <a class="nav-link" href="http://127.0.0.1:8000/profile">Profile</a>
             </li>
           </ul>
         </div>
