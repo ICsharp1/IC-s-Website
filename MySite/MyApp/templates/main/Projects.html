@@ -1,5 +1,9 @@
 {% extends 'main/base.html' %}
 
+{% block title %}
+  Projects
+{% endblock %}
+
 {% block content %}
   <div class="w3-main w3-content w3-padding overflow-hidden" style="max-width:1200px;margin-top:100px">
     {% for pl in ps %}
@@ -8,7 +12,7 @@
           <div class="w3-quarter w3-hover-shadow">
             <img src="{{ p.image }}" style="width:100%" alt="Image couldn't be displayed" />
             <h3>{{ p.title }}</h3>
-            <hr>
+            <hr />
             <p>{{ p.description }}</p>
             {% if p.ProjectPageExists %}
               <a href="{{ p.url }}" target="_parent"><button class="w3-button w3-aqua" style="margin: 30px">Know more</button></a>

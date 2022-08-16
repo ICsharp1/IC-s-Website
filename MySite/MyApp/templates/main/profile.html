@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+  Your profile
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <h1>{{ user.username }}</h1>
+  {% else %}
+    <h1>Please sign in first</h1>
+  {% endif %}
+{% endblock %}
