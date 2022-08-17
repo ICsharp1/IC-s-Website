@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Project
 
 
 class sign_up_form(forms.Form):
@@ -24,13 +26,13 @@ class log_in_form(forms.Form):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
 
-class adding_project_form(forms.Form):
-    title = forms.CharField(max_length=200, label='Title')
-    description = forms.CharField(label='Description', widget=forms.Textarea)
-    image = forms.URLField(label='Image Link')
-    Projectlink = forms.URLField(label='Project Link')
-    ProjectPageExists = forms.BooleanField(
-        label='Project Page Exists', required=False)
+# class adding_project_form(forms.Form):
+#     title = forms.CharField(max_length=200, label='Title')
+#     description = forms.CharField(label='Description', widget=forms.Textarea)
+#     image = forms.URLField(label='Image Link')
+#     url = forms.URLField(label='Project Link')
+#     ProjectPageExists = forms.BooleanField(
+#         label='Project Page Exists', required=False)
 
     # def clean(self):
     #     cleaned_data = super().clean()
@@ -40,3 +42,16 @@ class adding_project_form(forms.Form):
     #     if password != confirm_password:
     #         raise forms.ValidationError('Password does not match')
     #     return cleaned_data
+
+
+class adding_project_form(ModelForm):
+    title = forms.CharField(max_length=200, label='Title')
+    description = forms.CharField(label='Description', widget=forms.Textarea)
+    image = forms.URLField(label='Image Link')
+    url = forms.URLField(label='Project Link')
+    ProjectPageExists = forms.BooleanField(
+        label='Project Page Exists', required=False)
+
+    class Meta:
+        model = Project
+        fields = ['title', 'description', 'image', 'url', 'ProjectPageExists']

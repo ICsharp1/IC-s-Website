@@ -1,30 +1,34 @@
 from asyncio.windows_events import NULL
 from pickle import NONE
-from urllib import response
+from urllib import request
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Project
+from register.models import Account
 from .forms import sign_up_form
 from .forms import adding_project_form
+import os
 # Create your views here.
 
 
-def index(response):
-    return render(response, 'main/base.html', {})
+def index(request):
+    return render(request, 'main/base.html', {})
 
 
-def bs(response):
-    if response.user.is_authenticated:
-        ps = response.user.projects.all()
-        return render(response, 'main/bs.html', {"ps": ps, "count": len(ps)})
-    return render(response, 'main/bs.html', {"ps": NULL, "count": NULL})
+def bs(request):
+    if request.user.is_authenticated:
+
+        projects = Project.objects.filter(account=request.user.account)
+
+        return render(request, 'main/bs.html', {"ps": projects, "count": len(projects)})
+    return render(request, 'main/bs.html', {"ps": NULL, "count": NULL})
 
 
-def profile(response):
-    if response.user.is_authenticated:
-        user = response.user
-        return render(response, 'main/profile.html', {"user": user})
-    return render(response, 'main/home.html', {})
+def profile(request):
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'main/profile.html', {"user": user})
+    return render(request, 'main/home.html', {})
 
 
 def split_list(arr, size):
@@ -37,45 +41,50 @@ def split_list(arr, size):
     return arrs
 
 
-def home(response):
+def home(request):
     ps = Project.objects.all()
     number_of_cards = 4
     ps = split_list(ps, number_of_cards)
-    return render(response, 'main/home.html', {"ps": ps})
+    return render(request, 'main/home.html', {"ps": ps})
 
 
-def projects(response):
+def projects(request):  # deprecated
     ps = Project.objects.all()
     number_of_cards = 4
     ps = split_list(ps, number_of_cards)
-    return render(response, 'main/projects.html', {"ps": ps, "count": len(ps)})
+    return render(request, 'main/projects.html', {"ps": ps, "count": len(ps)})
 
 
-def addproject(response):
-    if response.method == "POST":
-        form = adding_project_form(response.POST)
+def addproject(request):
+    projects = Project.objects.all()
+    if request.user.is_authenticated:
+        # print("\n\n\n\n\n\n", os.getcwd()) thats how you can print stuff that pretty cool
+        if request.method == "POST":
+            form = adding_project_form(request.POST)
 
-        if form.is_valid():
-            title = form.cleaned_data["title"]
-            description = form.cleaned_data["description"]
-            image = form.cleaned_data["image"]
-            url = form.cleaned_data["url"]
-            ProjectPageExists = form.cleaned_data["ProjectPageExists"]
-            p = Project(title=title, description=description, image=image,
-                        url=url, ProjectPageExists=ProjectPageExists)
-            p.save()
-            if response.user.projects.all().count() <= 100:
-                response.user.projects.add(p)
-            return redirect('/projects')
+            if form.is_valid():
+                # title = form.cleaned_data["title"]
+                # description = form.cleaned_data["description"]
+                # image = form.cleaned_data["image"]
+                # url = form.cleaned_data["url"]
+                # ProjectPageExists = form.cleaned_data["ProjectPageExists"]
+                # p = Project(title=title, description=description, image=image,
+                #             url=url, ProjectPageExists=ProjectPageExists, account=request.user)
+                # p.save()
 
-    else:
-        form = adding_project_form()
-    return render(response, 'main/addproject.html', {"form": form})
+                form.account = request.user.account
+                form.save()
+                return bs(request, projects)
+
+        else:
+            form = adding_project_form()
+        return render(request, 'main/addproject.html', {"form": form})
+    return render(request, 'main/home.html', {})
 
 
-def signup(response):
-    if response.method == "POST":
-        form = sign_up_form(response.POST)
+def signup(request):
+    if request.method == "POST":
+        form = sign_up_form(request.POST)
 
         if form.is_valid():
             title = form.cleaned_data["title"]
@@ -88,4 +97,4 @@ def signup(response):
             p.save()
     else:
         form = sign_up_form()
-    return render(response, 'main/signup.html', {"form": form})
+    return render(request, 'main/signup.html', {"form": form})

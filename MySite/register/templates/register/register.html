@@ -23,6 +23,7 @@
 {% block content %}
   <form method="post" class="form-group align-middle">
     {% csrf_token %}
+    {{ user_form|crispy }}
     {{ form|crispy }}
     <button type="submit" class="btn btn-success">Register</button>
   </form>
