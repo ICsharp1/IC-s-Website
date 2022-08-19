@@ -6,6 +6,14 @@ import os
 # Create your views here.
 
 
+# class profileView(templateView):
+#     template_name = "profile.html"
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['user'] = self.request.user
+#         return context
+
+
 def register(request):
     if request.method == "POST":
         user_form = registerForm(request.POST)
@@ -22,3 +30,10 @@ def register(request):
         user_form = registerForm()
         #form = AccountForm()
     return render(request, "register/register.html", {"user_form": user_form})
+
+
+def profile(request):
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'profile.html', {"user": user})
+    return render(request, 'main/home.html', {})

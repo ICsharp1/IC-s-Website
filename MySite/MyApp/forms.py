@@ -48,7 +48,7 @@ class adding_project_form(ModelForm):
     title = forms.CharField(max_length=200, label='Title')
     description = forms.CharField(label='Description', widget=forms.Textarea)
     image = forms.URLField(label='Image Link')
-    url = forms.URLField(label='Project Link')
+    url = forms.URLField(label='Project Link', required=False)
     ProjectPageExists = forms.BooleanField(
         label='Project Page Exists', required=False)
 

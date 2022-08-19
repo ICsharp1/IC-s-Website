@@ -1,0 +1,9 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <form method="post" action="/signup/">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" name="save">Sign up</button>
+    </form>
+{% endblock %}

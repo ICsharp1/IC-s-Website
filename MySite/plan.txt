@@ -1,0 +1,7 @@
+adding a profile page where you can add and see profile and add an image.
+
+adding to project a boolean for publish and then a page for all published projects
+
+	-after that adding a comment model with text and upvotes 
+		-maybe later also recomments for existing comments
+

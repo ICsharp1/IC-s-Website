@@ -24,13 +24,6 @@ def bs(request):
     return render(request, 'main/bs.html', {"ps": NULL, "count": NULL})
 
 
-def profile(request):
-    if request.user.is_authenticated:
-        user = request.user
-        return render(request, 'main/profile.html', {"user": user})
-    return render(request, 'main/home.html', {})
-
-
 def split_list(arr, size):
     arrs = []
     while len(arr) > size:
@@ -73,8 +66,11 @@ def addproject(request):
                 # p.save()
 
                 form.account = request.user.account
+                print("\n\n\n\n\n\n", os.getcwd())
+                print(form.account, os.getcwd())
+                print("\n\n\n\n\n\n", os.getcwd())
                 form.save()
-                return bs(request, projects)
+                return bs(request)
 
         else:
             form = adding_project_form()
