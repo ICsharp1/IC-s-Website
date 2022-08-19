@@ -49,29 +49,21 @@ def projects(request):  # deprecated
 
 
 def addproject(request):
-    projects = Project.objects.all()
     if request.user.is_authenticated:
         # print("\n\n\n\n\n\n", os.getcwd()) thats how you can print stuff that pretty cool
         if request.method == "POST":
             form = adding_project_form(request.POST)
 
             if form.is_valid():
-                # title = form.cleaned_data["title"]
-                # description = form.cleaned_data["description"]
-                # image = form.cleaned_data["image"]
-                # url = form.cleaned_data["url"]
-                # ProjectPageExists = form.cleaned_data["ProjectPageExists"]
-                # p = Project(title=title, description=description, image=image,
-                #             url=url, ProjectPageExists=ProjectPageExists, account=request.user)
-                # p.save()
-
-                form.account = request.user.account
-                print("\n\n\n\n\n\n", os.getcwd())
-                print(form.account, os.getcwd())
-                print("\n\n\n\n\n\n", os.getcwd())
-                form.save()
-                return bs(request)
-
+                p = Project()
+                p.account = request.user.account
+                p.title = form.cleaned_data["title"]
+                p.description = form.cleaned_data["description"]
+                p.image = form.cleaned_data["image"]
+                p.url = form.cleaned_data["url"]
+                p.ProjectPageExists = form.cleaned_data["ProjectPageExists"]
+                p.save()
+                return redirect("/bs")
         else:
             form = adding_project_form()
         return render(request, 'main/addproject.html', {"form": form})
