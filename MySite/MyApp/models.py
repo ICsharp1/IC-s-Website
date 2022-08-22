@@ -19,3 +19,19 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    Commenter = models.ForeignKey(
+        Account, on_delete=models.CASCADE, related_name='comments', null=True)
+    Project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name='comments', null=True)
+
+    commentText = models.TextField()
+
+    class Meta:
+        verbose_name = ('Comment')
+        verbose_name_plural = ('Comments')
+
+    def __str__(self):
+        return self.commentText
