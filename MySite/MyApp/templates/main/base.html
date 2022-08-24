@@ -13,49 +13,97 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 
     <style>
+      :root {
+        --clr-color: black;
+        --clr-selected: rgb(51, 204, 51);
+        --clr-navbarcolor: rgb(54, 210, 35);
+        --clr-base: rgb(212, 226, 239);
+        --clr-secondary: rgb(67, 47, 172);
+        --clr-important: rgb(32, 203, 247);
+        --clr-write: rgb(0, 0, 0);
+        --clr-sep: black;
+      }
       body {
-        color: rgb(255, 255, 255);
-        background-color: rgb(29, 41, 53);
+        color: var(--clr-color);
+        background-color: var(--clr-base);
+        font-size: 1.5em;
       }
       ::selection {
-        color: #828ed5;
+        color: var(--clr-selected);
+        text-shadow: 0px 1px black;
       }
       .hidden {
         display: none;
+      }
+      .wrap:hover {
+        box-shadow: 0px 0px 5px 2px black;
+      }
+      .cardcolor {
+        background-color: var(--clr-base);
+      }
+      .navbarcolor {
+        color: var(--clr-write);
+        background-color: var(--clr-secondary);
+      }
+      .pnavbar {
+        width: 100%;
+        height: 12%;
+        background-color: var(--clr-secondary);
+      }
+      .plink:hover {
+      }
+      .plink:hover {
+        box-shadow: 0px 0px 3px 1px inset black;
+        color: var(--clr-write);
+      }
+      .plinks {
+        position: relative;
+        top: 10px;
+      }
+      .sep {
+        background-color: var(--clr-sep);
+        border-color: var(--clr-sep);
+      }
+      /*              Darkmode classes              */
+      .darkmode {
+        --clr-color: white;
+        --clr-background: rgb(29, 41, 53);
+        --clr-selected: rgb(125, 113, 42);
+        --clr-navbarcolor: rgb(201, 45, 202);
       }
     </style>
   </head>
 
   <body>
-    <div class="container">
-      <nav class="navbar navbar-expand-sm" style="color: #36d223">
+    <div class="container-fluid pnavbar">
+      <nav class="navbar navbar-expand-sm navbarcolor">
         <a class="navbar-brand" href="#">
-          <img src="https://i.postimg.cc/XNcGzd2s/logo.png" alt="Bootstrap" width="30" height="24" class="d-inline-block align-top" />
+          <img src="https://i.postimg.cc/XNcGzd2s/logo.png" style="position: relative; top: 10px;" alt="Bootstrap" width="30" height="24" class="d-inline-block align-top" />
           <span class="hidden">Bootstrap</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu" aria-controls="toggleMobileMenu" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="toggleMobileMenu">
-          <ul class="navbar-nav ms-auto text-center">
+          <ul class="navbar-nav ms-auto text-cente plinks">
             <li>
-              <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+              <a class="nav-link plink" href="http://127.0.0.1:8000/">Home</a>
             </li>
             <li>
-              <a class="nav-link" href="http://127.0.0.1:8000/login">Sign in</a>
+              <a class="nav-link plink" href="http://127.0.0.1:8000/login">Sign in</a>
             </li>
             <li>
-              <a class="nav-link" href="http://127.0.0.1:8000/bs">Browse projects</a>
+              <a class="nav-link plink" href="http://127.0.0.1:8000/bs">Browse projects</a>
             </li>
             <li>
-              <a class="nav-link" href="http://127.0.0.1:8000/register/">Register</a>
+              <a class="nav-link plink" href="http://127.0.0.1:8000/register/">Register</a>
             </li>
             <li>
-              <a class="nav-link" href="http://127.0.0.1:8000/addproject/">Add project</a>
+              <a class="nav-link plink" href="http://127.0.0.1:8000/addproject/">Add project</a>
             </li>
             <li>
-              <a class="nav-link" href="http://127.0.0.1:8000/profile">Profile</a>
+              <a class="nav-link plink" href="http://127.0.0.1:8000/profile">Profile</a>
             </li>
             <li>
-              <a class="nav-link" href="http://127.0.0.1:8000/logout">Logout</a>
+              <a class="nav-link plink" href="http://127.0.0.1:8000/logout">Logout</a>
             </li>
           </ul>
         </div>

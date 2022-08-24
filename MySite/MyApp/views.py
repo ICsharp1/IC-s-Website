@@ -24,6 +24,19 @@ def bs(request):
     return render(request, 'main/bs.html', {"ps": NULL, "count": NULL})
 
 
+def projectId(request, id):
+    if request.user.is_authenticated:
+        p = Project.objects.filter(id=id)[0]
+        print("\n\n\n\n\n\n", os.getcwd())
+        print(dir(p), os.getcwd())
+        print("\n\n\n\n\n\n", os.getcwd())
+
+        project_creator = p.account
+        account = request.user.account
+        if account == project_creator:
+            return render(request, 'main/project.html', {"project": p})
+
+
 def split_list(arr, size):
     arrs = []
     while len(arr) > size:
@@ -67,7 +80,7 @@ def addproject(request):
         else:
             form = adding_project_form()
         return render(request, 'main/addproject.html', {"form": form})
-    return render(request, 'main/home.html', {})
+    return redirect("/login")
 
 
 def signup(request):

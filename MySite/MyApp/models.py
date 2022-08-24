@@ -5,6 +5,7 @@ from register.models import Account
 
 
 class Project(models.Model):
+    
     account = models.ForeignKey(
         Account, on_delete=models.CASCADE, related_name='projects', null=True)
     title = models.CharField(max_length=200)

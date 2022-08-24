@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Project
+from .models import Project, Comment
 from register.models import Account
 
 
@@ -56,3 +56,11 @@ class adding_project_form(ModelForm):
     class Meta:
         model = Project
         fields = ['title', 'description', 'image', 'url', 'ProjectPageExists']
+
+
+class adding_comment_form(ModelForm):
+    commentText = forms.CharField(label='Comment', widget=forms.Textarea)
+
+    class Meta:
+        model = Comment
+        fields = ['commentText']
