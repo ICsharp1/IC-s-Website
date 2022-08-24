@@ -49,6 +49,7 @@
         width: 100%;
         height: 12%;
         background-color: var(--clr-secondary);
+        margin-bottom: 30px;
       }
       .plink:hover {
       }
@@ -57,12 +58,16 @@
         color: var(--clr-write);
       }
       .plinks {
-        position: relative;
-        top: 10px;
       }
       .sep {
         background-color: var(--clr-sep);
         border-color: var(--clr-sep);
+      }
+      #logo {
+        position: relative;
+        right: 80px;
+        max-width: 300px;
+        max-height: 240px;
       }
       /*              Darkmode classes              */
       .darkmode {
@@ -75,39 +80,34 @@
   </head>
 
   <body>
-    <div class="container-fluid pnavbar">
-      <nav class="navbar navbar-expand-sm navbarcolor">
-        <a class="navbar-brand" href="#">
-          <img src="https://i.postimg.cc/XNcGzd2s/logo.png" style="position: relative; top: 10px;" alt="Bootstrap" width="30" height="24" class="d-inline-block align-top" />
-          <span class="hidden">Bootstrap</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu" aria-controls="toggleMobileMenu" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="toggleMobileMenu">
-          <ul class="navbar-nav ms-auto text-cente plinks">
-            <li>
-              <a class="nav-link plink" href="http://127.0.0.1:8000/">Home</a>
-            </li>
-            <li>
-              <a class="nav-link plink" href="http://127.0.0.1:8000/login">Sign in</a>
-            </li>
-            <li>
-              <a class="nav-link plink" href="http://127.0.0.1:8000/bs">Browse projects</a>
-            </li>
-            <li>
-              <a class="nav-link plink" href="http://127.0.0.1:8000/register/">Register</a>
-            </li>
-            <li>
-              <a class="nav-link plink" href="http://127.0.0.1:8000/addproject/">Add project</a>
-            </li>
-            <li>
-              <a class="nav-link plink" href="http://127.0.0.1:8000/profile">Profile</a>
-            </li>
-            <li>
-              <a class="nav-link plink" href="http://127.0.0.1:8000/logout">Logout</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <div class="navbar navbar-expand pnavbar">
+      <div class="container">
+        <!-- <img class="navbar-brand" src="https://i.postimg.cc/XNcGzd2s/logo.png" /> -->
+        <a class="navbar-brand" href="#"><img id="logo" src="https://i.postimg.cc/qqjG9vTh/logo-transparent.png" /></a>
+        <ul class="navbar-nav plinks">
+          <li class="nav-item">
+            <a class="nav-link plink" href="http://127.0.0.1:8000/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link plink" href="http://127.0.0.1:8000/login">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link plink" href="http://127.0.0.1:8000/bs">Browse projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link plink" href="http://127.0.0.1:8000/register/">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link plink" href="http://127.0.0.1:8000/addproject/">Add project</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link plink" href="http://127.0.0.1:8000/profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link plink" href="http://127.0.0.1:8000/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
     </div>
     {% block content %}
 

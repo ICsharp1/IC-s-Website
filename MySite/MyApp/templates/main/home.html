@@ -9,5 +9,11 @@
     <h2>About me</h2>
     <p>Hi! i am israel cohen and welcome to my website, in my Website you can see my projects, sign up to comment on the projects and contact me using the contacting form</p>
     <button style="font-size : 2em;" type="button" class="btn btn-outline-primary">Hire</button>
+    {% if alert != '~~' %}
+      <div style="position: relative; top: 10px;" class="alert alert-success alert-dismissible" role="alert">
+        {{ alert }}
+        <button class="btn btn-close" aria-label="Close" data-bs-dismiss="alert">✕</button>
+      </div>
+    {% endif %}
   </div>
 {% endblock %}

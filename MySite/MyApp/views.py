@@ -47,11 +47,11 @@ def split_list(arr, size):
     return arrs
 
 
-def home(request):
-    ps = Project.objects.all()
-    number_of_cards = 4
-    ps = split_list(ps, number_of_cards)
-    return render(request, 'main/home.html', {"ps": ps})
+def home(request, alert=NULL):
+    if alert != NULL:
+        return render(request, 'main/home.html', {"alert": "Your project was successfully added to your collection"})
+    else:
+        return render(request, 'main/home.html', {"alert": "~~"})
 
 
 def projects(request):  # deprecated
@@ -76,10 +76,11 @@ def addproject(request):
                 p.url = form.cleaned_data["url"]
                 p.ProjectPageExists = form.cleaned_data["ProjectPageExists"]
                 p.save()
-                return redirect("/bs")
+                return home(request, "You project was successfully added to your collection")
         else:
             form = adding_project_form()
-        return render(request, 'main/addproject.html', {"form": form})
+            return render(request, 'main/addproject.html', {"form": form})
+
     return redirect("/login")
 
 
