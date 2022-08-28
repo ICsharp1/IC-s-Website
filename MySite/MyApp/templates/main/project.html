@@ -6,6 +6,24 @@
 
 {% block content %}
   <div>
-    <img src="{{ project.image }}" />
+    <style>
+      .imd {
+        text-align: center;
+      }
+      .im {
+        max-width: 600px;
+        max-height: 450px;
+        margin: 30px;
+      }
+    </style>
+    <div class="imd">
+      <img class="im" src="{{ p.image }}" />
+    </div>
+    <h1 style="margin: 20px;text-align:center">{{ p.title }}</h1>
+    <h3 style="margin: 40px;text-align:center;margin-top: 20;">
+      {{ p.description }}
+      <br />
+      <a style="font-size: 1em;margin: 33px;text-align:center;" href="{{ p.url }}" class="btn btn-primary">Know more</a>
+    </h3>
   </div>
 {% endblock %}

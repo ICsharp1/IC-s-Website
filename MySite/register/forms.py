@@ -9,8 +9,7 @@ from .models import Account
 
 class registerForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
-    Dark = forms.BooleanField(
-        label='DarkMode')
+    Dark = forms.BooleanField(label='DarkMode', required=False)
 
     class Meta:
         model = User

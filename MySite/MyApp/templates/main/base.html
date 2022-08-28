@@ -21,7 +21,10 @@
         --clr-secondary: rgb(67, 47, 172);
         --clr-important: rgb(32, 203, 247);
         --clr-write: rgb(0, 0, 0);
-        --clr-sep: black;
+        --clr-text: white;
+        --clr-cur: red;
+        --clr-btn: rgb(7, 159, 197);
+        --clr-shadowbox: black;
       }
       body {
         color: var(--clr-color);
@@ -36,7 +39,7 @@
         display: none;
       }
       .wrap:hover {
-        box-shadow: 0px 0px 5px 2px black;
+        box-shadow: 0px 0px 5px 2px var(--clr-shadowbox);
       }
       .cardcolor {
         background-color: var(--clr-base);
@@ -48,70 +51,118 @@
       .pnavbar {
         width: 100%;
         height: 12%;
-        background-color: var(--clr-secondary);
         margin-bottom: 30px;
+        background-color: var(--clr-secondary);
+      }
+      .navbar-custom {
+        background-color: var(--clr-secondary);
+      }
+      .plink {
+        color: var(--clr-important) !important;
       }
       .plink:hover {
-      }
-      .plink:hover {
-        box-shadow: 0px 0px 3px 1px inset black;
-        color: var(--clr-write);
-      }
-      .plinks {
+        box-shadow: -0px 0px 3px 1px inset var(--clr-shadowbox);
       }
       .sep {
-        background-color: var(--clr-sep);
-        border-color: var(--clr-sep);
+        background-color: var(--clr-secondary);
+        border-color: var(--clr-secondary);
       }
       #logo {
         position: relative;
-        right: 80px;
-        max-width: 300px;
-        max-height: 240px;
+        top: -0px;
+        left: -90px;
+        max-width: 170px;
+        max-height: 170px;
+      }
+      .cur {
+        box-shadow: -0px 0px 3px 1px var(--clr-shadowbox);
+      }
+      input:not([type='submit']),
+      textarea {
+        background-color: var(--clr-text) !important;
       }
       /*              Darkmode classes              */
       .darkmode {
-        --clr-color: white;
-        --clr-background: rgb(29, 41, 53);
-        --clr-selected: rgb(125, 113, 42);
-        --clr-navbarcolor: rgb(201, 45, 202);
+        --clr-color: rgb(230, 230, 230);
+        --clr-selected: blue;
+        --clr-navbarcolor: rgb(54, 210, 35);
+        --clr-base: rgb(13, 13, 13);
+        --clr-secondary: rgb(34, 25, 17);
+        --clr-important: rgb(214, 78, 0);
+        --clr-write: white;
+        --clr-sep: black;
+        --clr-text: white;
+        --clr-cur: rgb(255, 51, 204);
+        --clr-btn: rgb(179, 65, 0);
+        --clr-shadowbox: white;
+      }
+      .container {
+        height: 90px;
+      }
+      .btn-primary {
+        background-color: var(--clr-important);
+        border-color: var(--clr-important);
+      }
+      .btn-primary:hover {
+        background-color: var(--clr-btn);
+        border-color: var(--clr-btn);
       }
     </style>
   </head>
 
   <body>
-    <div class="navbar navbar-expand pnavbar">
+    <div class="navbar navbar-expand-md navbar-dark navbar-custom">
       <div class="container">
-        <!-- <img class="navbar-brand" src="https://i.postimg.cc/XNcGzd2s/logo.png" /> -->
-        <a class="navbar-brand" href="#"><img id="logo" src="https://i.postimg.cc/qqjG9vTh/logo-transparent.png" /></a>
-        <ul class="navbar-nav plinks">
-          <li class="nav-item">
-            <a class="nav-link plink" href="http://127.0.0.1:8000/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link plink" href="http://127.0.0.1:8000/login">Sign in</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link plink" href="http://127.0.0.1:8000/bs">Browse projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link plink" href="http://127.0.0.1:8000/register/">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link plink" href="http://127.0.0.1:8000/addproject/">Add project</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link plink" href="http://127.0.0.1:8000/profile">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link plink" href="http://127.0.0.1:8000/logout">Logout</a>
-          </li>
-        </ul>
+        {% if Dark %}
+          <a class="navbar-brand" href="#"><img id="logo" src="https://i.postimg.cc/nLWzS8xJ/logo-transparent.png" /></a>
+        {% else %}
+          <a class="navbar-brand" href="#"><img id="logo" src="https://i.postimg.cc/qqjG9vTh/logo-transparent.png" /></a>
+        {% endif %}
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol" aria-controls="navcol" aria-label="Expand navbar"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol">
+          <ul class="navbar-nav plinks">
+            <li class="nav-item">
+              <a id="home" class="nav-link plink" href="http://127.0.0.1:8000/">Home</a>
+            </li>
+            {% if not user.is_authenticated %}
+              <li class="nav-item">
+                <a id="Sign" class="nav-link plink" href="http://127.0.0.1:8000/login">Sign in</a>
+              </li>
+            {% endif %}
+            <li class="nav-item">
+              <a id="Browse" class="nav-link plink" href="http://127.0.0.1:8000/bs">Browse projects</a>
+            </li>
+            <li class="nav-item">
+              <a id="Register" class="nav-link plink" href="http://127.0.0.1:8000/register/">Register</a>
+            </li>
+            <li class="nav-item">
+              <a id="Add" class="nav-link plink" href="http://127.0.0.1:8000/addproject/">Add project</a>
+            </li>
+            <li class="nav-item">
+              <a id="Profile" class="nav-link plink" href="http://127.0.0.1:8000/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a id="Logout" class="nav-link plink" href="http://127.0.0.1:8000/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     {% block content %}
 
     {% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    {% block active %}
+
+    {% endblock %}
+
+    {% if Dark %}
+      <script>
+        function darkModeOn() {
+          document.body.classList.add('darkmode')
+        }
+        darkModeOn()
+      </script>
+    {% endif %}
   </body>
 </html>

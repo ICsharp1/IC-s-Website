@@ -13,3 +13,9 @@
     <button type="submit" name="save">Add Project</button>
   </form>
 {% endblock %}
+
+{% block active %}
+  <script>
+    document.getElementById('{{id}}').classList.add('cur')
+  </script>
+{% endblock %}

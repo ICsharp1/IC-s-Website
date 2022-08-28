@@ -16,25 +16,29 @@ def index(request):
 
 
 def bs(request):
-    if request.user.is_authenticated:
-
+    user = request.user
+    if user.is_authenticated:
+        dark = user.account.Dark
         projects = Project.objects.filter(account=request.user.account)
 
-        return render(request, 'main/bs.html', {"ps": projects, "count": len(projects)})
-    return render(request, 'main/bs.html', {"ps": NULL, "count": NULL})
+        return render(request, 'main/bs.html', {"ps": projects, "count": len(projects), "id": "Browse", "Dark": dark})
+    return home(request, 'You need to sign in order to watch your projects')
 
 
-def projectId(request, id):
-    if request.user.is_authenticated:
-        p = Project.objects.filter(id=id)[0]
+def projectId(request, pk):
+    user = request.user
+    if user.is_authenticated:
+        dark = user.account.Dark
+        p = Project.objects.get(id=pk)
         print("\n\n\n\n\n\n", os.getcwd())
-        print(dir(p), os.getcwd())
+        print(p, os.getcwd())
         print("\n\n\n\n\n\n", os.getcwd())
-
         project_creator = p.account
-        account = request.user.account
+        account = user.account
         if account == project_creator:
-            return render(request, 'main/project.html', {"project": p})
+            return render(request, 'main/project.html', {"p": p, "Dark": dark})
+        else:
+            home(request, 'You can\'t view a project that is not your\'s')
 
 
 def split_list(arr, size):
@@ -47,11 +51,16 @@ def split_list(arr, size):
     return arrs
 
 
-def home(request, alert=NULL):
-    if alert != NULL:
-        return render(request, 'main/home.html', {"alert": "Your project was successfully added to your collection"})
+def home(request, alert='~~'):
+    user = request.user
+    if user.is_authenticated:
+        dark = user.account.Dark
+        if alert != '~~':
+            return render(request, 'main/home.html', {"alert": alert, "id": "home", "Dark": dark})
+        else:
+            return render(request, 'main/home.html', {"alert": alert, "id": "home", "Dark": dark})
     else:
-        return render(request, 'main/home.html', {"alert": "~~"})
+        return render(request, 'main/home.html', {"alert": alert, "id": "home", "Dark": NULL})
 
 
 def projects(request):  # deprecated
@@ -62,7 +71,9 @@ def projects(request):  # deprecated
 
 
 def addproject(request):
-    if request.user.is_authenticated:
+    user = request.user
+    if user.is_authenticated:
+        dark = user.account.Dark
         # print("\n\n\n\n\n\n", os.getcwd()) thats how you can print stuff that pretty cool
         if request.method == "POST":
             form = adding_project_form(request.POST)
@@ -79,24 +90,6 @@ def addproject(request):
                 return home(request, "You project was successfully added to your collection")
         else:
             form = adding_project_form()
-            return render(request, 'main/addproject.html', {"form": form})
+            return render(request, 'main/addproject.html', {"form": form, "id": "Add", "Dark": dark})
 
-    return redirect("/login")
-
-
-def signup(request):
-    if request.method == "POST":
-        form = sign_up_form(request.POST)
-
-        if form.is_valid():
-            title = form.cleaned_data["title"]
-            description = form.cleaned_data["description"]
-            image = form.cleaned_data["image"]
-            url = form.cleaned_data["url"]
-            ProjectPageExists = form.cleaned_data["ProjectPageExists"]
-            p = Project(title=title, description=description, image=image,
-                        url=url, ProjectPageExists=ProjectPageExists)
-            p.save()
-    else:
-        form = sign_up_form()
-    return render(request, 'main/signup.html', {"form": form})
+    return home(request, 'You need to sign in order to Add a project')

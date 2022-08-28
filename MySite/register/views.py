@@ -3,6 +3,7 @@ from .forms import registerForm
 #from django.contrib.auth.forms import UserCreationForm
 from .models import Account
 import os
+from MyApp import views
 # Create your views here.
 
 
@@ -29,11 +30,15 @@ def register(request):
     else:
         user_form = registerForm()
         #form = AccountForm()
-    return render(request, "register/register.html", {"user_form": user_form})
+    return render(request, "register/register.html", {"user_form": user_form, "id": "Register"})
 
 
 def profile(request):
+    user = request.user
     if request.user.is_authenticated:
-        user = request.user
-        return render(request, 'profile.html', {"user": user})
-    return render(request, 'main/home.html', {})
+        dark = user.account.Dark
+        return render(request, 'profile.html', {"user": user, "id": "Profile"})
+    return views.home(request, 'You need to sign in order to see your profile')
+
+
+# i need to add a grid of fire particles - mostly using javascript

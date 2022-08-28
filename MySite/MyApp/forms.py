@@ -64,3 +64,7 @@ class adding_comment_form(ModelForm):
     class Meta:
         model = Comment
         fields = ['commentText']
+
+
+class dark_mode(ModelForm):
+    pass

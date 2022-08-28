@@ -13,3 +13,9 @@
     <h1>Please sign in first</h1>
   {% endif %}
 {% endblock %}
+
+{% block active %}
+  <script>
+    document.getElementById('{{id}}').classList.add('cur')
+  </script>
+{% endblock %}
