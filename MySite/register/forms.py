@@ -23,17 +23,17 @@ class registerForm(UserCreationForm):
         return user, user_profile
 
 
-# class UpdateAccountForm(forms.ModelForm):
-#     email = forms.EmailField(max_length=200, help_text='Required')r
-#     Dark = forms.BooleanField(label='DarkMode', required=False)
+class UpdateForm(UserCreationForm):
+    Dark = forms.BooleanField(label='DarkMode', required=False)
 
-#     class Meta:r
-#         model = Account
-#         fields = ['username', 'email', 'password1', 'password2', 'Dark']
+    class Meta:
+        model = User
+        exclude = ()
+        fields = ['password1', 'password2', 'Dark']
 
-#     def save(self):
-#         user = super(registerForm, self).save(commit=True)
-#         user_profile = Account(
-#             user=user, Dark=self.cleaned_data['Dark'], email=self.cleaned_data['email'])
-#         user_profile.save()
-#         return user, user_profile
+    def save(self):
+        user = super(registerForm, self).save(commit=True)
+        user_profile = Account(
+            user=user, Dark=self.cleaned_data['Dark'])
+        user_profile.save()
+        return user, user_profile
