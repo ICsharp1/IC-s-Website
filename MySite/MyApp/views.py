@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Project
 from register.models import Account
-from .forms import sign_up_form
 from .forms import adding_project_form
 import os
 # Create your views here.
